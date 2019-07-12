@@ -87,5 +87,5 @@ class Teammate : public People {
     Teammate();
     ~Teammate();
     void virtual skill();
-}
+};
 }  // namespace Oblect
