@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo apt-get install build-essential libtcmalloc-minimal4 && sudo ln -s /usr/lib/libtcmalloc_minimal.so.4 /usr/lib/libtcmalloc_minimal.so
-
+sudo apt-get install libncurses-dev
 read -n1 -p "Do you wnat to include devlopment mode? [Y/n]" doit
 
 case ${doit} in
