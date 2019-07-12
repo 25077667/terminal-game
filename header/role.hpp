@@ -3,7 +3,7 @@
 // maybe have some friends? or competitor?
 //
 
-namespace Oblect {
+namespace Object {
 
 typedef struct {
     int row, column;
@@ -88,4 +88,4 @@ class Teammate : public People {
     ~Teammate();
     void virtual skill();
 };
-}  // namespace Oblect
+}  // namespace Object
