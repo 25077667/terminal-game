@@ -8,3 +8,20 @@ this is a game in linux, use posix.
 this networking is using from ' https://github.com/ipkn/crow '
 
 for initial the environment you can use the 'init.sh'
+
+
+
+## In my plain:
+
+You can clone this master branch repo. and make to compile it by your self.
+I want to use docker container to hold the internet service.
+You can docker pull "my_image" to get my service setting.
+
+Maybe to can 
+
+```
+sudo docker run -d --name terminal_game -p 3000:3000 my_image
+```
+
+to run it~
+
