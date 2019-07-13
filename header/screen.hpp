@@ -1,3 +1,6 @@
+#ifndef SCREEN_HPP
+#define SCREEN_HPP
+
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <cstdlib>
@@ -43,3 +46,5 @@ void mapShift(char** fullMap, screenInfo screenArgs) {
     char* newGenRow = genRow(screenArgs.row - 1);
     memcpy(fullMap[0], newGenRow, sizeof(char) * screenArgs.row - 1);
 }
+
+#endif
