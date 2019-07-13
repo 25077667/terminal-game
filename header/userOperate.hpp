@@ -3,13 +3,19 @@
 #include <fstream>
 #include <iostream>
 #include <thread>
+#include "screen.hpp"
+
+void arrowUp();
+void arrowDown();
+void arrowLeft();
+void arrowRight();
 
 /* ref: 
 * http://www.csie.ntnu.edu.tw/~ghhwang/course_slices/OS/Curses_Usage.txt
 * https://linux.die.net/man/3/keypad
 */
 
-void listenKeyBoard() {
+void listenKeyBoard(int* keyValue) {
     std::ifstream keyBoard("/dev/input/event4");
     if (keyBoard.fail()) {
         perror("No keyBoard: ");
@@ -34,22 +40,22 @@ void listenKeyBoard() {
     */
     keypad(stdscr, true);
     nodelay(stdscr, true);
+    refresh();
 
-    int keyValue;
     while (true) {
         usleep(10);
-        keyValue = getch();
+        (*keyValue) = getch();
 
-        if (keyValue == KEY_UP) {
-            std::cout << "U" << std::endl;
-        } else if (keyValue == KEY_DOWN) {
-            std::cout << "D" << std::endl;
-        } else if (keyValue == KEY_LEFT) {
-            std::cout << "L" << std::endl;
-        } else if (keyValue == KEY_RIGHT) {
-            std::cout << "R" << std::endl;
-        } else if (isalnum(keyValue)) {
-            addch(char(keyValue));
+        if ((*keyValue) == KEY_UP) {
+            arrowUp();
+        } else if ((*keyValue) == KEY_DOWN) {
+            arrowDown();
+        } else if ((*keyValue) == KEY_LEFT) {
+            arrowLeft();
+        } else if ((*keyValue) == KEY_RIGHT) {
+            arrowRight();
+        } else if (isalnum((*keyValue))) {
+            //addch(char(*keyValue));
         } else
             continue;
 
@@ -60,4 +66,15 @@ void listenKeyBoard() {
         */
     }
     endwin();
+}
+
+
+//move the Object, dont move the map!
+void arrowUp() {
+}
+void arrowDown() {
+}
+void arrowLeft() {
+}
+void arrowRight() {
 }
