@@ -8,7 +8,7 @@ services:
 	$(cc) header/testServer/hw.cpp $(flags) -lboost_system -lpthread -o crw_server
 
 headers:
-	$(cc) header/userOperate.hpp -lncurses - o 
+	$(cc) header/userOperate.hpp -lpthread -lncurses
 	$(cc) header/screen.hpp
 	$(cc) header/role.hpp
 	$(cc) $(flags) header/networking.hpp -lboost_system -lpthread
