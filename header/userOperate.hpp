@@ -18,7 +18,7 @@ void arrowRight();
 void listenKeyBoard(int* keyValue) {
     std::ifstream keyBoard("/dev/input/event4");
     if (keyBoard.fail()) {
-        perror("No keyBoard: ");
+        perror("Cannot read keyBoard: ");
         exit(1);
     }
 
