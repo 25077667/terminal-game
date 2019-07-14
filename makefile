@@ -15,3 +15,6 @@ headers:
 	$(cc) header/writeJson.hpp
 
 clean:
+
+test:
+	$(cc) main.cpp -lpthread -lncurses -lboost_system
