@@ -10,7 +10,7 @@ services:
 headers:
 	$(cc) header/userOperate.hpp -lpthread -lncurses
 	$(cc) header/screen.hpp
-	$(cc) header/role.hpp
+	$(cc) header/role.hpp header/skillSet.hpp -lboost_system
 	$(cc) $(flags) header/networking.hpp -lboost_system -lpthread
 	$(cc) header/writeJson.hpp
 
