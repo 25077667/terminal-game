@@ -4,7 +4,7 @@
 #include "skillSet.hpp"
 
 void Object::Enemy::skill() {
-    void (*doSkill)((*People) &, std::vector<double> & argvs);
+    void (*doSkill)(Object::People & _this, std::vector<double> & argvs) = nullptr;
     std::vector<double> argvs;
 
     switch (this->skillID) {
@@ -15,14 +15,15 @@ void Object::Enemy::skill() {
             doSkill = EnemySkill::addHp;
             break;
         default:
+            doSkill = TeamSkill::noneSkill;
             break;
     }
-    doSkill(this, argvs);
+    doSkill(*this, argvs);
 }
 
-void Object::Me::boost(){}
+void Object::Me::boost() {}
 void Object::Me::skill() {
-    void (*doSkill)((*People) &, std::vector<double> &);
+    void (*doSkill)(Object::People & _this, std::vector<double> & argvs) = nullptr;
     std::vector<double> argvs;
 
     switch (this->skillID) {
@@ -33,15 +34,16 @@ void Object::Me::skill() {
             doSkill = TeamSkill::addHp;
             break;
         default:
+            doSkill = TeamSkill::noneSkill;
             break;
     }
 
-    doSkill(this, argvs);
+    doSkill(*this, argvs);
 }
 void Object::Me::touch() {}
 
 void Object::Teammate::skill() {
-    void (*doSkill)((*People) &, std::vector<double> &);
+    void (*doSkill)(Object::People & _this, std::vector<double> & argvs) = nullptr;
     std::vector<double> argvs;
 
     switch (this->skillID) {
@@ -52,7 +54,8 @@ void Object::Teammate::skill() {
             doSkill = TeamSkill::addHp;
             break;
         default:
+            doSkill = TeamSkill::noneSkill;
             break;
     }
-    doSkill(this, argvs);
+    doSkill(*this, argvs);
 }
