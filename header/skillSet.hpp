@@ -4,18 +4,24 @@
 #include "role.hpp"
 
 namespace TeamSkill {
-void noneSkill(Object::People& current, std::vector<double>& argvs) {
+void noneSkill(Object::People& _this, std::vector<unsigned int>& argvs) {
 }
-void addHp(Object::People& current, std::vector<double>& argvs) {
-    current.setHP(current.getHP() + argvs.at(0));
+void addHp(Object::People& _this, std::vector<unsigned int>& argvs) {
+    _this.setHP(_this.getHP() + argvs.at(1));
+}
+void minusHP(Object::People& _this, std::vector<unsigned int>& argvs){
+    _this.setHP(_this.getHP()-argvs.at(1));
 }
 }  // namespace TeamSkill
 
 namespace EnemySkill {
-void noneSkill(Object::People& current, std::vector<double>& argvs) {
+void noneSkill(Object::People& _this, std::vector<unsigned int>& argvs) {
 }
-void addHp(Object::People& current, std::vector<double>& argvs) {
-    current.setHP(current.getHP() + argvs.at(0));
+void addHp(Object::People& _this, std::vector<unsigned int>& argvs) {
+    _this.setHP(_this.getHP() + argvs.at(1));
+}
+void minusHP(Object::People& _this, std::vector<unsigned int>& argvs) {
+    _this.setHP(_this.getHP() - argvs.at(1));
 }
 }  // namespace EnemySkill
 
