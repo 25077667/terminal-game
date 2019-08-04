@@ -1,3 +1,6 @@
+#ifndef USER_OPERATE
+#define USER_OPERATE
+
 #include <curses.h>
 #include <unistd.h>
 #include <fstream>
@@ -9,6 +12,7 @@ void arrowUp();
 void arrowDown();
 void arrowLeft();
 void arrowRight();
+static bool isPause = false;
 
 /* ref: 
 * http://www.csie.ntnu.edu.tw/~ghhwang/course_slices/OS/Curses_Usage.txt
@@ -56,6 +60,9 @@ void listenKeyBoard(int* keyValue) {
             arrowRight();
         } else if (isalnum((*keyValue))) {
             //addch(char(*keyValue));
+        } else if ((*keyValue) == ' ') {
+            // pause/resume
+            isPause = !isPause;
         } else
             continue;
 
@@ -68,13 +75,22 @@ void listenKeyBoard(int* keyValue) {
     endwin();
 }
 
-
 //move the Object, dont move the map!
 void arrowUp() {
+    if (!isPause) {
+    }
 }
 void arrowDown() {
+    if (!isPause) {
+    }
 }
 void arrowLeft() {
+    if (!isPause) {
+    }
 }
 void arrowRight() {
+    if (!isPause) {
+    }
 }
+
+#endif
