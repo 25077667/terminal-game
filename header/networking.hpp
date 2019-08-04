@@ -4,7 +4,7 @@
 #include "crow_all.h"
 #include "role.hpp"
 
-enum BattleMode { single,
+extern enum BattleMode { single,
                   battle,
                   teamWork };
 void initPlayMode() {

@@ -1,6 +1,6 @@
 #!/bin/bash
-sudo apt-get install build-essential libtcmalloc-minimal4 && sudo ln -s /usr/lib/libtcmalloc_minimal.so.4 /usr/lib/libtcmalloc_minimal.so
-sudo apt-get install libncurses-dev
+sudo apt-get -y install build-essential libtcmalloc-minimal4 && sudo ln -s /usr/lib/libtcmalloc_minimal.so.4 /usr/lib/libtcmalloc_minimal.so
+sudo apt-get -y install libncurses-dev
 
 if [ "$(ls -l /dev/input/ | grep event4 | awk '{print $3}')"="root" ]; then
     echo -n 'linten keyboard need root!'
