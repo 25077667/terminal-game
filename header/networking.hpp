@@ -7,7 +7,7 @@
 enum BattleMode { single,
                   battle,
                   teamWork };
-void init() {
+void initPlayMode() {
     int selectMode;
     std::cout << "Which mode do you want to play? (1. single, 2. battle, 3. teamwork)" << std::endl;
     std::cin >> selectMode;
@@ -27,7 +27,7 @@ void init() {
             break;
     }
 }
-void syncTeammate(std::map<unsigned int, Object::Teammate>& team) {
+void syncTeammate(std::map<unsigned int, Object::Teammate>& _team) {
     using namespace std;
     crow::SimpleApp app;
 
@@ -37,15 +37,15 @@ void syncTeammate(std::map<unsigned int, Object::Teammate>& team) {
             if (!x)
                 return crow::response(400);
 
-            if(team.find(x["id"]) == team.end()){
-                team[x["id"]] = Object::Teammate()
+            if(_team.find(x["id"]) == _team.end()){
+                _team[x["id"]] = Object::Teammate();
             }else{
-                team[x["id"]].setCorrdinates(x["row"], x["column"]);
-                team[x["id"]].setHP(x["hp"]);
-                team[x["id"]].setATK(x["attack"]);
-                team[x["id"]].setDEF(x["defense"]);
-                team[x["id"]].setAttribite(x["attribute"]);
-                team[x["id"]].setCorrdinates(x["row"], x["column"]);
+                _team[x["id"]].setCorrdinates(x["row"], x["column"]);
+                _team[x["id"]].setHP(x["hp"]);
+                _team[x["id"]].setATK(x["attack"]);
+                _team[x["id"]].setDEF(x["defense"]);
+                _team[x["id"]].setAttribite(x["attribute"]);
+                _team[x["id"]].setCorrdinates(x["row"], x["column"]);
             }
 
             return crow::response(200);

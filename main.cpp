@@ -6,7 +6,7 @@
 using namespace std;
 
 int main() {
-    init();
+    initPlayMode();
 
     int* keyValue = new int;
     usleep(100);
