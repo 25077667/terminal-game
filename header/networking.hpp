@@ -1,10 +1,13 @@
 #ifndef NETWORKING_HPP
 #define NETWORKING_HPP
 
+#include "/usr/include/nlohmann/json.hpp"
 #include "crow_all.h"
 #include "role.hpp"
 
-extern enum BattleMode { single,
+using Json = nlohmann::json;
+
+enum BattleMode { single,
                   battle,
                   teamWork };
 void initPlayMode() {
@@ -33,7 +36,7 @@ void syncTeammate(std::map<unsigned int, Object::Teammate>& _team) {
 
     CROW_ROUTE(app, "/syncTeammate")
         .methods("POST"_method)([](const crow::request& req) {
-            auto x = crow::json::load(req.body);
+            Json x = crow::json::load(req.body);
             if (!x)
                 return crow::response(400);
 

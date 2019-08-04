@@ -1,7 +1,8 @@
-#include "header/userOperate.hpp"
-#include "header/writeJson.hpp"
-#include "header/screen.hpp"
+#include "/usr/include/nlohmann/json.hpp"
+#include "header/json.hpp"
 #include "header/role.hpp"
+#include "header/screen.hpp"
+#include "header/userOperate.hpp"
 #include "header/networking.hpp"
 using namespace std;
 
@@ -16,7 +17,7 @@ int main() {
             // show user do action
             // send signal to server
             addch(char(*keyValue));
-            usleep(80); //the computer is too fast to lead inputs have one or more char 
+            usleep(80);  //the computer is too fast to lead inputs have one or more char
         }
     }
     keyboardEvent.join();
