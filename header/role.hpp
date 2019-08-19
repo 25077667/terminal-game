@@ -4,8 +4,10 @@
 //
 #ifndef ROLE_HPP
 #define ROLE_HPP
+#include <time.h>
 #include <functional>
 #include <random>
+#include <string>
 #include <vector>
 //#include "skillSet.hpp"
 
@@ -33,7 +35,7 @@ class Role {
         this->width = _role.width;
         this->coordinates = _role.coordinates;
     }
-    ~Role();
+    ~Role(){}
     void actionEffect();
     //void sync();
     const int getLength() { return this->length; }
@@ -77,30 +79,39 @@ class Item : public Role {
 
 class People : public Role {
    public:
-    People(Role _base, int _hp, unsigned int _atk, unsigned int _def, unsigned int _att)
-        : Role(_base), hp(_hp), attack(_atk), defense(_def), attribute(_att) {
-        generateID();
+    People() {
+        setName();
+        this->score = 0;
+        this->speed = 1;
+        this->skin = nullptr;
     }
+    People(Role _base, std::string _name, unsigned int _score, unsigned int _speed)
+        : Role(_base), name(_name), score(_score), speed(_speed) {}
     People(const People &_base) : Role(_base.getRole()) {
-        this->hp = _base.hp;
-        this->attack = _base.attack;
-        this->defense = _base.defense;
-        this->attribute = _base.attribute;
-        generateID();
+        this->score = _base.getScore();
+        this->name = _base.getName();
+        this->speed = _base.getSpeed();
     }
-    ~People();
+    ~People(){}
 
-    const int getHP() { return this->hp; }
-    const unsigned int getATK() { return this->attack; }
-    const unsigned int getDEF() { return this->defense; }
-    const unsigned int getAttribute() { return this->attribute; }
-    const unsigned int getID() { return this->id; }
+    const unsigned int getScore() const { return this->score; }
+    const std::string getName() const { return this->name; }
+    const unsigned int getSpeed() const { return this->speed; }
     const Role getRole() const { return Role(this->coordinates, this->width, this->length); }
+    
 
-    void setHP(int _hp) { this->hp = _hp; }
-    void setATK(unsigned int _atk) { this->attack = _atk; }
-    void setDEF(unsigned int _def) { this->defense = _def; }
-    void setAttribite(unsigned int _att) { this->attribute = _att; }
+    void setScore(unsigned int _score) { this->score = _score; }
+    void setName(std::string _name) {
+        this->name = _name;
+    }
+    void setName() {
+        std::string _name;
+        std::cout << "Please input your name: ";
+        std::cin >> _name;
+        this->name = _name;
+        cout << "Set name compeleted!" << std::endl;
+    }
+    void setSpeed(unsigned int _speed) { this->speed = _speed; }
 
     void virtual skill(std::vector<unsigned int> &argvs);
     const char **getSkin();
@@ -109,17 +120,10 @@ class People : public Role {
         this->coordinates.column = _column;
     }
 
-   private:
-    void generateID() {
-        unsigned int r = genRandom();
-        std::hash<unsigned int> int_hash;
-        this->id = int_hash(this->hp) + int_hash(this->attack) + int_hash(this->defense) + int_hash(this->attack) + int_hash(r);
-    }
-
    protected:
-    int hp;
-    unsigned int id, attack, defense, attribute;
-    char **skin;
+    unsigned int score, speed;
+    std::string name;
+    char **skin;  // might delete
 };
 
 class Enemy : public People {
@@ -132,16 +136,34 @@ class Enemy : public People {
 class Me : public People {
    public:
     Me(const People _base);
-    ~Me() {}
+    ~Me() {
+        // game over and upload the score
+    }
+    const unsigned int getID() const { return this->id; }
+    const time_t getTimeStamp() const { return this->timeStamp; }
     void boost();
     void virtual skill(std::vector<unsigned int> &argvs);
     void whileTouch(Object::Item &);
+
+   private:
+    void generateID() {
+        unsigned int r = genRandom();
+        std::hash<unsigned int> int_hash;
+        this->id = int_hash(r);
+    }
+    void setTimeStamp() {
+        this->timeStamp = time(NULL);
+    }
+    unsigned int id;
+    time_t timeStamp;
 };
 
 class Teammate : public People {
    public:
     Teammate(const People _base) : People(_base) {}
-    ~Teammate() {}
+    ~Teammate() {
+        //send signal to the server
+    }
     void virtual skill(std::vector<unsigned int> &argvs);
 };
 }  // namespace Object
