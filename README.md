@@ -28,7 +28,7 @@ to run it~
 ## how to play this game?
 this is a tereminal game like "tetris battle" but not actually is.
 there are some attribute below:
-> id
 > name
 > score
 > personal effect or skill
+> running speed
